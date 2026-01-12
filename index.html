@@ -186,9 +186,6 @@
   <!-- Contact Section -->
   <div data-include="partials/contact.html"></div>
 
-  <!-- Admissions Section -->
-  <div data-include="partials/admissions.html"></div>
-
   <!-- Footer -->
   <div data-include="partials/footer.html"></div>
 
@@ -201,44 +198,25 @@
   <!-- Include loader + AOS + Year script -->
   <script>
   // Load all partials
-  // Promise.all(
-  // Array.from(document.querySelectorAll('[data-include]')).map(el => 
-  //   fetch(el.getAttribute('data-include'))
-  //     .then(res => res.text())
-  //     .then(html => { el.innerHTML = html; return el; })
-  //   )
-  // ).then(() => {
-  //   AOS.init({
-  //     duration: 800,
-  //     easing: 'ease-in-out',
-  //     once: true,
-  //     offset: 100
-  //   });
-
-  //   const yearEl = document.getElementById('year');
-  //   if (yearEl) {
-  //     yearEl.textContent = new Date().getFullYear();
-  //   }
-  // });
-    // Load all partials
-    document.querySelectorAll('[data-include]').forEach(el => {
-      fetch(el.getAttribute('data-include'))
-        .then(res => res.text())
-        .then(html => { el.innerHTML = html; });
+  Promise.all(
+  Array.from(document.querySelectorAll('[data-include]')).map(el => 
+    fetch(el.getAttribute('data-include'))
+      .then(res => res.text())
+      .then(html => { el.innerHTML = html; return el; })
+    )
+  ).then(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100
     });
 
-    // Initialize AOS (after partials load)
-    setTimeout(() => {
-      AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 100
-      });
-    }, 500);
-
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  });
   </script>
 
 

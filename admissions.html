@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admissions — Vishy School of Yoga</title>
+
+  <!-- Bootstrap CSS + Fonts + AOS (same as index.html) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <!-- Navbar (loads from partials) -->
+  <div data-include="partials/navbar.html"></div>
+
+  <!-- Admissions Hero -->
+  <!-- <section class="py-5 text-center text-white" style="background: linear-gradient(135deg, #d96c33 0%, #f4a259 100%);">
+    <div class="container py-5" data-aos="fade-up">
+      <h1 class="display-4 fw-bold mb-4">Join Vishy School of Yoga</h1>
+      <p class="lead mb-4">Register for classes and start your wellness journey today</p>
+      <a href="#register-form" class="btn btn-light btn-lg px-5">Register Now</a>
+    </div>
+  </section> -->
+
+  <!-- Registration Form -->
+  <!-- Registration Form -->
+<section id="register-form" class="py-5" style="background: linear-gradient(135deg, #ffffff 0%, #fab905 100%);">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-body p-5">
+              <h2 class="h3 fw-bold text-center mb-5">Student Registration Form</h2>
+              
+              <form action="https://formsubmit.co/vishveshkvarma@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Yoga Student Registration">
+                <input type="hidden" name="_next" value="index.html#contact">
+                <input type="hidden" name="_captcha" value="false">
+
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Full Name *</label>
+                    <input type="text" class="form-control" name="name" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Phone *</label>
+                    <input type="tel" class="form-control" name="phone" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" name="email">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Age</label>
+                    <input type="number" class="form-control" name="age" min="16">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Preferred Classes</label>
+                    <select class="form-select" name="classes">
+                      <option>Select preferred style</option>
+                      <option>Hatha Yoga</option>
+                      <option>Vinyasa Flow</option>
+                      <option>Beginner Yoga</option>
+                      <option>Pranayama & Meditation</option>
+                      <option>Power Yoga</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Best Days</label>
+                    <div class="d-flex flex-wrap gap-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="days[]" value="Mon">
+                        <label class="form-check-label">Monday</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="days[]" value="Tue">
+                        <label class="form-check-label">Tuesday</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="days[]" value="Wed">
+                        <label class="form-check-label">Wednesday</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="days[]" value="Thu">
+                        <label class="form-check-label">Thursday</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="days[]" value="Fri">
+                        <label class="form-check-label">Friday</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Medical Notes (optional)</label>
+                    <textarea class="form-control" name="medical" rows="3" placeholder="Any injuries, conditions, or pregnancy?"></textarea>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-accent btn-lg px-5">
+                      Submit Registration
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fees Section -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-lg-3 mb-4" data-aos="fade-up">
+          <div class="h1 fw-bold text-accent mb-2">₹300</div>
+          <div class="h6 fw-semibold">Trial Class</div>
+        </div>
+        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="h1 fw-bold text-accent mb-2">₹2500</div>
+          <div class="h6 fw-semibold">Monthly (8 classes)</div>
+        </div>
+        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="h1 fw-bold text-accent mb-2">₹6500</div>
+          <div class="h6 fw-semibold">Quarterly (save 15%)</div>
+        </div>
+        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="h1 fw-bold text-accent mb-2">Contact Us</div>
+          <div class="h6 fw-semibold">Private Sessions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div data-include="partials/footer.html"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Load partials
+    document.querySelectorAll('[data-include]').forEach(el => {
+      fetch(el.getAttribute('data-include')).then(res => res.text()).then(html => {
+        el.innerHTML = html;
+      });
+    });
+
+    // AOS init
+    setTimeout(() => {
+      AOS.init({duration: 800, easing: 'ease-in-out', once: true});
+    }, 500);
+  </script>
+</body>
+</html>
