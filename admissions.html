@@ -10,24 +10,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Custom Styles for Darker Colors -->
+  <style>
+    /* Darker accent color for numbers and radio buttons */
+    .dark-accent {
+      background-color: #c8551a !important;
+    }
+    
+    /* Darker radio buttons */
+    #register-form .form-check-input:checked {
+      background-color: #c8551a;
+      border-color: #c8551a;
+    }
+    
+    #register-form .form-check-input:focus {
+      box-shadow: 0 0 0 0.25rem rgba(200, 85, 26, 0.25);
+    }
+    
+    /* Ensure consistency */
+    .text-dark-accent {
+      color: #c8551a !important;
+    }
+  </style>
 </head>
 
 <body>
   <!-- Navbar (loads from partials) -->
   <div data-include="partials/navbar.html"></div>
 
-  <!-- Admissions Hero -->
-  <!-- <section class="py-5 text-center text-white" style="background: linear-gradient(135deg, #d96c33 0%, #f4a259 100%);">
-    <div class="container py-5" data-aos="fade-up">
-      <h1 class="display-4 fw-bold mb-4">Join Vishy School of Yoga</h1>
-      <p class="lead mb-4">Register for classes and start your wellness journey today</p>
-      <a href="#register-form" class="btn btn-light btn-lg px-5">Register Now</a>
-    </div>
-  </section> -->
-
   <!-- Registration Form -->
-  <!-- Registration Form -->
-<section id="register-form" class="py-5" style="background: linear-gradient(135deg, #ffffff 0%, #fab905 100%);">
+  <section id="register-form" class="py-5" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -50,86 +63,99 @@
                     <input type="tel" class="form-control" name="phone" required>
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label fw-semibold">Email</label>
+                    <label class="form-label fw-semibold">Email *</label>
                     <input type="email" class="form-control" name="email">
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label fw-semibold">Age</label>
+                    <label class="form-label fw-semibold">Age *</label>
                     <input type="number" class="form-control" name="age" min="16">
                   </div>
                   <div class="col-12">
-                    <label class="form-label fw-semibold">Preferred Classes</label>
-                    <select class="form-select" name="classes">
-                      <option>Select preferred style</option>
-                      <option>Hatha Yoga</option>
-                      <option>Vinyasa Flow</option>
-                      <option>Beginner Yoga</option>
-                      <option>Pranayama & Meditation</option>
-                      <option>Power Yoga</option>
-                    </select>
+                    <label class="form-label fw-semibold">Address *</label>
+                    <input type="text" class="form-control" name="address" required>
                   </div>
                   <div class="col-12">
-                    <label class="form-label fw-semibold">Best Days</label>
-                    <div class="d-flex flex-wrap gap-3">
+                    <label class="form-label fw-semibold">Emergency Contact *</label>
+                    <input type="text" class="form-control" name="emergency_contact" required>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Preferred Batch *</label>
+                    <div class="d-flex flex-column gap-3 mt-2">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="Mon">
-                        <label class="form-check-label">Monday</label>
+                        <input class="form-check-input" type="radio" name="batch" value="batch1" id="batch1" required>
+                        <label class="form-check-label" for="batch1">
+                          Morning Batch (6:00 AM - 7:00 AM)
+                        </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="Tue">
-                        <label class="form-check-label">Tuesday</label>
+                        <input class="form-check-input" type="radio" name="batch" value="batch2" id="batch2" required>
+                        <label class="form-check-label" for="batch2">
+                          Morning Batch (7:30 AM - 8:30 AM)
+                        </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="Wed">
-                        <label class="form-check-label">Wednesday</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="Thu">
-                        <label class="form-check-label">Thursday</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="days[]" value="Fri">
-                        <label class="form-check-label">Friday</label>
+                        <input class="form-check-input" type="radio" name="batch" value="batch3" id="batch3" required>
+                        <label class="form-check-label" for="batch3">
+                          Evening Batch (5:30 PM - 6:30 PM)
+                        </label>
                       </div>
                     </div>
                   </div>
                   <div class="col-12">
-                    <label class="form-label fw-semibold">Medical Notes (optional)</label>
+                    <label class="form-label fw-semibold">Mode *</label>
+                    <div class="d-flex flex-column gap-3 mt-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="mode" value="online" id="mode1" required>
+                        <label class="form-check-label" for="mode1">Online</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="mode" value="offline" id="mode2" required>
+                        <label class="form-check-label" for="mode2">Offline</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="mode" value="hybrid" id="mode3" required>
+                        <label class="form-check-label" for="mode3">Hybrid</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Medical Notes or Health Problems (if any)</label>
                     <textarea class="form-control" name="medical" rows="3" placeholder="Any injuries, conditions, or pregnancy?"></textarea>
                   </div>
-                  <div class="col-12 text-center">
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Weight (Can be checked at the yoga center)</label>
+                    <input type="text" class="form-control" name="weight">
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label fw-semibold">Blood Group</label>
+                    <input type="text" class="form-control" name="blood_group">
+                  </div>
+                  
+                  <!-- Submit Button -->
+                  <div class="col-12 text-center mb-5">
                     <button type="submit" class="btn btn-accent btn-lg px-5">
                       Submit Registration
                     </button>
+                  </div>
+
+                  <!-- Important Notes Section -->
+                  <!-- Replace the entire Important Notes section with this simpler version -->
+
+                <div class="col-12">
+                  <div class="alert alert-info border-0 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                    <h5 class="alert-heading mb-4"><i class="bi bi-info-circle-fill me-2"></i>Important Notes</h5>
+                    <ul class="list-unstyled mb-0">
+                      <li class="mb-3 pb-2 border-bottom">✓ If you are <strong>above 40 years and suffering from any disease,</strong> please consult your Doctor before admission.</li>
+                      <li class="mb-3 pb-2 border-bottom">✓ Vishy School of Yoga is conducting General Classes i.e., promotion of positive health ( Syllabus of Svyasa-Yoga University).</li>
+                      <li class="mb-3 pb-2 border-bottom">✓ Yoga is <strong>not recommended</strong> for Ladies during menstrual periods and also after 3rd month of pregnanacy.</li>
+                      <li class="mb-3 pb-2 border-bottom">✓ <strong>Empty stomach</strong> is advisable for Morning batch students.</li>
+                      <li class="mb-3">✓ <strong>3 - 4 hours gap after lunch</strong> is advisable for evening batch students.</li>
+                    </ul>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Fees Section -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-lg-3 mb-4" data-aos="fade-up">
-          <div class="h1 fw-bold text-accent mb-2">₹300</div>
-          <div class="h6 fw-semibold">Trial Class</div>
-        </div>
-        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="h1 fw-bold text-accent mb-2">₹2500</div>
-          <div class="h6 fw-semibold">Monthly (8 classes)</div>
-        </div>
-        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="h1 fw-bold text-accent mb-2">₹6500</div>
-          <div class="h6 fw-semibold">Quarterly (save 15%)</div>
-        </div>
-        <div class="col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="h1 fw-bold text-accent mb-2">Contact Us</div>
-          <div class="h6 fw-semibold">Private Sessions</div>
         </div>
       </div>
     </div>
