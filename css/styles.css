@@ -66,9 +66,15 @@ body {
 }
 
 
-.navbar {
+.home-page .navbar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: #fcac66 !important;
+  backdrop-filter: blur(10px);
+}
+
+.admissions-page .navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #A9CCE3 !important;
   backdrop-filter: blur(10px);
 }
 
