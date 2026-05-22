@@ -3,13 +3,12 @@ import { db, collection, addDoc } from "./firebase-config.js";
 const form = document.getElementById("contactForm");
 
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbxu0wSyTEt7ln02C4psjqVWsLcV4Qk4qi-PeXLpz1M-pqAxMUYb5Bi2zZWczXgO5Nzh/exec";
-
+    "https://script.google.com/macros/s/AKfycbzGJV3JpU_FZxUp86GHpIWlwBn-Rm4NLM7LQeMPSil5P9GHZKBTy7tL13Hmy6MkcGul/exec";
+    
 form.addEventListener("submit", async (e) => {
 
   e.preventDefault();
 
-  // Firebase data object
   const firebaseData = {
     createdAt: new Date(),
     name: form.name.value,
@@ -17,29 +16,41 @@ form.addEventListener("submit", async (e) => {
     message: form.message.value
   };
 
+  // ✅ Show loading alert immediately on submit
+  Swal.fire({
+    title: "Sending...",
+    text: "Please wait while we send your message.",
+    icon: "info",
+    allowOutsideClick: false,       // ✅ Prevent user from dismissing it
+    allowEscapeKey: false,          // ✅ Prevent closing with Escape
+    showConfirmButton: false,       // ✅ No button, just a spinner feel
+    didOpen: () => {
+      Swal.showLoading();           // ✅ Shows the spinning loader
+    }
+  });
+
   try {
 
-    // Send data to Google Sheets
     await fetch(scriptURL, {
       method: "POST",
-      mode: "no-cors",                                  // ✅ Fixes CORS error
+      mode: "no-cors",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"  // ✅ Required for e.parameter
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: new URLSearchParams({                       // ✅ FormData won't work with no-cors
-        sheet: "Contact-Messages",                      // ✅ Fixed sheet name (was "ContactMessages")
+      body: new URLSearchParams({
+        sheet: "Contact-Messages",
         name: form.name.value,
         email: form.email.value,
         message: form.message.value
       })
     });
 
-    // Store in Firebase
     await addDoc(
       collection(db, "contact_messages"),
       firebaseData
     );
 
+    // ✅ Replaces the loading alert automatically
     Swal.fire({
       title: "Success!",
       text: "Message sent successfully!",
@@ -55,6 +66,7 @@ form.addEventListener("submit", async (e) => {
 
     console.error("Error submitting form:", error);
 
+    // ✅ Replaces the loading alert automatically
     Swal.fire({
       title: "Error!",
       text: "Something went wrong.",
