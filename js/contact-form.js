@@ -3,8 +3,7 @@ import { db, collection, addDoc } from "./firebase-config.js";
 const form = document.getElementById("contactForm");
 
 const scriptURL =
-    "https://script.google.com/macros/s/AKfycbzGJV3JpU_FZxUp86GHpIWlwBn-Rm4NLM7LQeMPSil5P9GHZKBTy7tL13Hmy6MkcGul/exec";
-    
+    "https://script.google.com/macros/s/AKfycbwWcq2f6pzsijvuXNM3kYazHUInqdT4TCiktrmFhULvKxkmSrrv67qeT2rIJKC3dF97/exec";    
 form.addEventListener("submit", async (e) => {
 
   e.preventDefault();

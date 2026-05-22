@@ -9,7 +9,7 @@ import {
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCf_hP9uIe40rmYS_Nv835Srl-6q5AyWNM",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "vishy-school-of-yoga.firebaseapp.com",
   projectId: "vishy-school-of-yoga",
   storageBucket: "vishy-school-of-yoga.firebasestorage.app",
