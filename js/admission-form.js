@@ -3,7 +3,7 @@ import { db, collection, addDoc } from "./firebase-config.js";
 const form = document.getElementById("admissionForm");
 
 const scriptURL =
-    "https://script.google.com/macros/s/AKfycbwWcq2f6pzsijvuXNM3kYazHUInqdT4TCiktrmFhULvKxkmSrrv67qeT2rIJKC3dF97/exec";
+    "https://script.google.com/macros/s/AKfycbwJLGhtNIodXSNrtlkTxrfv7RPjYwLreFXXheVXM9AI8Be4DxITq7S1yIqfq9pjnitt/exec";
 
 form.addEventListener("submit", async (e) => {
 

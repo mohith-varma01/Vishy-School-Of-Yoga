@@ -9,13 +9,13 @@ import {
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "vishy-school-of-yoga.firebaseapp.com",
-  projectId: "vishy-school-of-yoga",
-  storageBucket: "vishy-school-of-yoga.firebasestorage.app",
-  messagingSenderId: "385779499110",
-  appId: "1:385779499110:web:d1e4ed7ef59b9e734deda7",
-  measurementId: "G-7MGQNSQF6F"
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId:     import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
