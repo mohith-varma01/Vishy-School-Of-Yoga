@@ -24,123 +24,21 @@
 <!-- Vercel Web Analytics -->
 <script src="/_vercel/insights/script.js" defer></script>
 
-<body>
-
+<body class="home-page">
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <span class="brand">Vishy School of Yoga</span>
-      </a>      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="#classes">Classes</a></li>
-          <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
-          <li class="nav-item"><a class="nav-link" href="#instructors">Instructors</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <div data-include="partials/navbar.html"></div>
 
   <!-- Hero Carousel -->
-<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-  </div>
-
-  <div class="carousel-inner">
-
-    <!-- Slide 1 -->
-    <div class="carousel-item active hero-slide-1">
-      <img
-        src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1920&q=80"
-        class="d-block w-100 hero-img hero-img-1"
-        alt="Yoga practice on mat">
-      <div class="hero-overlay">
-        <div class="container h-100 d-flex align-items-center">
-          <div class="row justify-content-center w-100">
-            <div class="col-lg-8 text-center text-white">
-              <h1 class="display-4 fw-bold mb-4">Find Your Balance</h1>
-              <p class="lead mb-4">Discover the perfect harmony between mind, body, and spirit through our guided yoga practices</p>
-              <div class="d-flex justify-content-center gap-3">
-                <a href="#classes" class="btn btn-accent btn-lg">View Classes</a>
-                <a href="#contact" class="btn btn-light btn-lg">Book a Trial</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 2 -->
-    <div class="carousel-item hero-slide-2">
-      <img
-        src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1920&q=80"
-        class="d-block w-100 hero-img hero-img-2"
-        alt="Group yoga class">
-      <div class="hero-overlay">
-        <div class="container h-100 d-flex align-items-center">
-          <div class="row justify-content-center w-100">
-            <div class="col-lg-8 text-center text-white">
-              <h1 class="display-4 fw-bold mb-4">Breathe With Intention</h1>
-              <p class="lead mb-4">Experience transformative yoga sessions designed for all levels and abilities</p>
-              <div class="d-flex justify-content-center gap-3">
-                <a href="#schedule" class="btn btn-accent btn-lg">See Schedule</a>
-                <a href="#instructors" class="btn btn-light btn-lg">Meet Instructors</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="carousel-item hero-slide-3">
-      <img
-        src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=1920&q=80"
-        class="d-block w-100 hero-img hero-img-3"
-        alt="Yoga studio ambience">
-      <div class="hero-overlay">
-        <div class="container h-100 d-flex align-items-center">
-          <div class="row justify-content-center w-100">
-            <div class="col-lg-8 text-center text-white">
-              <h1 class="display-4 fw-bold mb-4">Join Our Community</h1>
-              <p class="lead mb-4">Small group classes, beginner-friendly workshops, and guided meditations — join us and blossom</p>
-              <div class="d-flex justify-content-center gap-3">
-                <a href="#classes" class="btn btn-accent btn-lg">Start Today</a>
-                <a href="#contact" class="btn btn-light btn-lg">Contact Us</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+  <div data-include="partials/carousel.html"></div>
 
   <!-- Classes Section -->
-  <section id="classes" class="py-5">
+  <!-- <div data-include="partials/classes.html"></div> -->
+
+    <section id="classes" class="py-5">
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
         <h2 class="display-6 fw-bold mb-3">What You'll Learn</h2>
-        <p class="text-muted lead">Comprehensive yoga training for mind, body, and spirit</p>
+        <p class="text-muted lead">Comprehensive yoga training for mind and body</p>
       </div>
 
       <div class="row g-4">
@@ -155,11 +53,16 @@
               </div>
               <h3 class="h5 fw-bold mb-3">Asanas & Postures</h3>
               <ul class="list-unstyled text-muted">
-                <li class="mb-2">✓ Standing poses for strength</li>
-                <li class="mb-2">✓ Seated poses for flexibility</li>
+                <li class="mb-2">✓ Standing poses</li>
+                <li class="mb-2">✓ Seated poses</li>
+                <li class="mb-2">✓ Prone Asanas</li>
+                <li class="mb-2">✓ Supine Asanas</li>
                 <li class="mb-2">✓ Balancing asanas</li>
                 <li class="mb-2">✓ Inversions & backbends</li>
                 <li class="mb-2">✓ Proper alignment techniques</li>
+                <li class="mb-2">✓ Loosening Asanas</li>
+                <li class="mb-2">✓ Sukshma Vyayama (Weekly once)</li>
+                <li class="fw-bold mb-2">✓ 12 Poses of Surya Namaskar </li>
               </ul>
             </div>
           </div>
@@ -177,11 +80,14 @@
               </div>
               <h3 class="h5 fw-bold mb-3">Pranayama (Breathwork)</h3>
               <ul class="list-unstyled text-muted">
-                <li class="mb-2">✓ Ujjayi breathing</li>
+                <li class="mb-2">✓ Kapalbhati (Single and Double Nostrils)</li>
+                <li class="mb-2">✓ Anulom Vilom Pranayama</li>
                 <li class="mb-2">✓ Nadi Shodhana (alternate nostril)</li>
-                <li class="mb-2">✓ Kapalabhati (skull shining)</li>
-                <li class="mb-2">✓ Bhramari (bee breath)</li>
-                <li class="mb-2">✓ Breath awareness techniques</li>
+                <li class="mb-2">✓ Bhastrika Pranayama</li>
+                <li class="mb-2">✓ Ujjayi breathing</li>
+                <li class="mb-2">✓ Svana Pranayama (Dog Breathing)</li>
+                <li class="mb-2">✓ Mudra Breathing (Weekly once)</li>
+                <li class="mb-2">✓ Animal Breathing (Weekly once)</li>
               </ul>
             </div>
           </div>
@@ -198,32 +104,8 @@
               </div>
               <h3 class="h5 fw-bold mb-3">Meditation & Mindfulness</h3>
               <ul class="list-unstyled text-muted">
-                <li class="mb-2">✓ Guided meditation sessions</li>
-                <li class="mb-2">✓ Mindfulness practices</li>
-                <li class="mb-2">✓ Mantra chanting</li>
-                <li class="mb-2">✓ Yoga Nidra (yogic sleep)</li>
-                <li class="mb-2">✓ Stress reduction techniques</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Philosophy -->
-        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="class-card card h-100 border-0">
-            <div class="card-body p-4">
-              <div class="icon-box mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="text-accent" viewBox="0 0 16 16">
-                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-                </svg>
-              </div>
-              <h3 class="h5 fw-bold mb-3">Yoga Philosophy</h3>
-              <ul class="list-unstyled text-muted">
-                <li class="mb-2">✓ Eight limbs of yoga</li>
-                <li class="mb-2">✓ Yamas and Niyamas</li>
-                <li class="mb-2">✓ Chakra system understanding</li>
-                <li class="mb-2">✓ Vedic principles</li>
-                <li class="mb-2">✓ Yogic lifestyle practices</li>
+                <li class="mb-2">✓ OM Meditation</li>
+                <li class="mb-2">✓ Cycling Meditation (IRT and DRT)</li>
               </ul>
             </div>
           </div>
@@ -250,7 +132,7 @@
           </div>
         </div>
 
-        <!-- Restorative Practices -->
+        <!-- Traataka Practices -->
         <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
           <div class="class-card card h-100 border-0">
             <div class="card-body p-4">
@@ -260,325 +142,72 @@
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                 </svg>
               </div>
-              <h3 class="h5 fw-bold mb-3">Restorative Practices</h3>
+              <h3 class="h5 fw-bold mb-3">Trataka Eye Exexercie     (Weekly Once)</h3>
               <ul class="list-unstyled text-muted">
-                <li class="mb-2">✓ Yin yoga techniques</li>
-                <li class="mb-2">✓ Prop-supported poses</li>
-                <li class="mb-2">✓ Deep relaxation methods</li>
-                <li class="mb-2">✓ Therapeutic applications</li>
-                <li class="mb-2">✓ Self-care routines</li>
+                <li class="mb-2">✓ Focused Gazing at a Single Point</li>
+                <li class="mb-2">✓ External Trataka (Candle Gazing)</li>
+                <li class="mb-2">✓ Eye Movement Variations</li>
               </ul>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Schedule -->
-<section id="schedule" class="py-5 bg-light">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h2 class="display-6 fw-bold mb-3">Weekly Schedule</h2>
-      <p class="text-muted lead">Choose the perfect time for your practice</p>
-    </div>
 
-    <div class="row g-4">
-      <!-- Monday -->
-      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-        <div class="schedule-card card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div class="day-badge">MON</div>
-              <h4 class="mb-0 ms-3">Monday</h4>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Morning Flow</span>
-                <span class="badge bg-accent">6:00 AM - 7:00 AM</span>
-              </div>
-              <p class="text-muted small mb-3">Energizing Vinyasa flow to start your day</p>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Evening Hatha</span>
-                <span class="badge bg-accent">6:00 PM - 7:30 PM</span>
-              </div>
-              <p class="text-muted small mb-0">Traditional Hatha practice for all levels</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tuesday -->
-      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
-        <div class="schedule-card card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div class="day-badge">TUE</div>
-              <h4 class="mb-0 ms-3">Tuesday</h4>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Pranayama & Meditation</span>
-                <span class="badge bg-accent">7:00 AM - 8:00 AM</span>
-              </div>
-              <p class="text-muted small mb-3">Breathwork and mindfulness practice</p>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Power Yoga</span>
-                <span class="badge bg-accent">7:00 PM - 8:00 PM</span>
-              </div>
-              <p class="text-muted small mb-0">Dynamic strength-building session</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Wednesday -->
-      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-        <div class="schedule-card card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div class="day-badge">WED</div>
-              <h4 class="mb-0 ms-3">Wednesday</h4>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Beginner's Yoga</span>
-                <span class="badge bg-accent">9:00 AM - 10:00 AM</span>
-              </div>
-              <p class="text-muted small mb-3">Perfect introduction to yoga fundamentals</p>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Yin Yoga</span>
-                <span class="badge bg-accent">6:30 PM - 7:30 PM</span>
-              </div>
-              <p class="text-muted small mb-0">Deep stretching and relaxation</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Thursday -->
-      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-        <div class="schedule-card card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div class="day-badge">THU</div>
-              <h4 class="mb-0 ms-3">Thursday</h4>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Ashtanga Yoga</span>
-                <span class="badge bg-accent">6:00 AM - 7:30 AM</span>
-              </div>
-              <p class="text-muted small mb-3">Traditional Ashtanga series practice</p>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Restorative Yoga</span>
-                <span class="badge bg-accent">7:00 PM - 8:00 PM</span>
-              </div>
-              <p class="text-muted small mb-0">Gentle healing and recovery session</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Friday (centered) -->
-      <div class="col-lg-6 mx-auto" data-aos="fade-up" data-aos-delay="300">
-        <div class="schedule-card card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-3">
-              <div class="day-badge">FRI</div>
-              <h4 class="mb-0 ms-3">Friday</h4>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Flow & Stretch</span>
-                <span class="badge bg-accent">7:00 AM - 8:00 AM</span>
-              </div>
-              <p class="text-muted small mb-3">Gentle flow with deep stretching</p>
-            </div>
-            <div class="schedule-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">Weekend Wind-Down</span>
-                <span class="badge bg-accent">6:00 PM - 7:00 PM</span>
-              </div>
-              <p class="text-muted small mb-0">Relaxing practice to end the week</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="text-center mt-5" data-aos="fade-up">
-      <p class="text-muted mb-3">Saturday & Sunday: Rest & Recovery Days</p>
-      <a href="#contact" class="btn btn-accent btn-lg">Book Your Class</a>
-    </div>
-  </div>
-</section>
-
-  <!-- Instructors -->
-<section id="instructors" class="py-5">
-  <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h2 class="display-6 fw-bold mb-3">Meet Your Instructor</h2>
-      <p class="text-muted lead">Guiding you with experience, compassion, and presence</p>
-    </div>
-
-    <div class="row align-items-center g-4">
-      <!-- Image left -->
-      <div class="col-lg-5" data-aos="fade-right">
-        <div class="instructor-photo-wrapper">
-          <img
-            src="images/Vishvesh.jpeg"
-            alt="Yoga instructor portrait"
-            class="img-fluid rounded-4 instructor-photo">
-        </div>
-      </div>
-
-      <!-- Text right -->
-      <div class="col-lg-7" data-aos="fade-left">
-        <div class="instructor-content">
-          <h3 class="fw-bold mb-2">Vishvesh</h3>
-          <p class="text-muted mb-3">Lead Instructor</p>
-          <p class="mb-3">
-            Vishvesh blends traditional yogic wisdom with modern alignment principles to create safe,
-            inspiring classes for all levels. His sessions focus on mindful movement, conscious
-            breathing, and sustainable practice that supports your body and mind.
-          </p>
-          <p class="mb-4">
-            With over 8 years of teaching experience, he specialises in helping beginners build
-            confidence, while offering deeper variations and subtle refinements for seasoned
-            practitioners seeking growth in their practice.
-          </p>
-          <ul class="list-unstyled small text-muted mb-4">
-            <li>• RYT-500 certified yoga teacher</li>
-            <li>• Specialised in therapeutic and restorative yoga</li>
-            <li>• Guided more than 2,000+ hours of group classes and workshops</li>
-          </ul>
-          <a href="#schedule" class="btn btn-accent btn-lg">Practice with Vishvesh</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- Testimonials -->
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up">
-        <h2 class="display-6 fw-bold mb-3">What Our Students Say</h2>
-      </div>
-      
-      <div class="row g-4">
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="testimonial">
-            <p class="mb-3">"The best yoga studio I've ever attended. The instructors are knowledgeable and the atmosphere is so welcoming!"</p>
-            <div class="fw-semibold">— Anjali K.</div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="testimonial">
-            <p class="mb-3">"I started as a complete beginner and now yoga is an essential part of my daily routine. Thank you Vishy School!"</p>
-            <div class="fw-semibold">— Rahul M.</div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="testimonial">
-            <p class="mb-3">"The meditation sessions have transformed my stress levels. I feel more centered and peaceful every day."</p>
-            <div class="fw-semibold">— Kavita S.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-5">
-    <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up">
-        <h2 class="display-6 fw-bold mb-3">Get In Touch</h2>
-        <p class="text-muted lead">Start your yoga journey today</p>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-lg-6" data-aos="fade-right">
-          <div class="card border-0 shadow-sm h-100">
+        <!-- Philosophy -->
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="class-card card h-100 border-0">
             <div class="card-body p-4">
-              <h4 class="fw-bold mb-4">Send Us a Message</h4>
-              <form>
-                <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Your Name">
-                </div>
-                <div class="mb-3">
-                  <input type="email" class="form-control" placeholder="Your Email">
-                </div>
-                <div class="mb-3">
-                  <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-accent w-100">Send Message</button>
-              </form>
+              <div class="icon-box mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="text-accent" viewBox="0 0 16 16">
+                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                </svg>
+              </div>
+              <h3 class="h5 fw-bold mb-3">Jala Neti</h3>
+              <ul class="list-unstyled text-muted">
+                <li class="mb-2">Jal Neti (or Jala Neti) is a traditional yogic nasal cleansing practice using a Neti pot with lukewarm salt water to flush out mucus, allergens, and pollutants, promoting clear breathing and respiratory health, benefiting sinus issues, asthma, and fatigue. It involves pouring saline water into one nostril and letting it flow out the other, requiring sterile water, proper salt balance, and gentle blowing afterward; it's part of Hatha Yoga's purification techniques (Shatkarmas) for overall balance.</li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <div class="col-lg-6" data-aos="fade-left">
-          <div class="card border-0 shadow-sm h-100">
-            <div class="card-body p-4">
-              <h4 class="fw-bold mb-4">Visit Our Studio</h4>
-              <div class="mb-4">
-                <h6 class="fw-semibold mb-2">Address</h6>
-                <p class="text-muted">15/A, 36th A Cross, 28th Main,<br>Jayanagar 9th Block,<br>Bangalore, Karnataka 560001</p>
-              </div>
-              <div class="mb-4">
-                <h6 class="fw-semibold mb-2">Phone</h6>
-                <p class="text-muted">+91 93425 60883</p>
-              </div>
-              <div class="mb-4">
-                <h6 class="fw-semibold mb-2">Email</h6>
-                <p class="text-muted">vishveshkvarma@gmail.com</p>
-              </div>
-              <div>
-                <h6 class="fw-semibold mb-2">Hours</h6>
-                <p class="text-muted">Monday - Friday: 6:00 AM - 8:00 PM<br>Saturday and Sunday: CLOSED</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
+
+  <!-- Schedule Section -->
+  <div data-include="partials/schedule.html"></div>
+
+  <!-- Instructors Section -->
+  <div data-include="partials/instructor.html"></div>
+
+  <!-- Testimonials Section -->
+  <div data-include="partials/testimonials.html"></div>
+
+  <!-- Contact Section -->
+  <div data-include="partials/contact.html"></div>
 
   <!-- Footer -->
-  <footer class="py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mb-3 mb-md-0">
-          <div class="brand text-white">Vishy School of Yoga</div>
-          <div class="small text-muted mt-2">© <span id="year">2024</span> Vishy School of Yoga — All rights reserved</div>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <a class="text-decoration-none text-muted small me-3" href="#">Privacy</a>
-          <a class="text-decoration-none text-muted small" href="#">Terms</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <div data-include="partials/footer.html"></div>
 
   <!-- Bootstrap Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- AOS Animation Library -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="module" src="js/contact-form.js"></script>
+ 
 
-  <!-- Initialize AOS -->
+  <!-- Include loader + AOS + Year script -->
   <script>
+  // Load all partials
+  Promise.all(
+  Array.from(document.querySelectorAll('[data-include]')).map(el => 
+    fetch(el.getAttribute('data-include'))
+      .then(res => res.text())
+      .then(html => { el.innerHTML = html; return el; })
+    )
+  ).then(() => {
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
@@ -586,9 +215,15 @@
       offset: 100
     });
 
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+  });
   </script>
+
+
+</script>
 
 </body>
 </html>

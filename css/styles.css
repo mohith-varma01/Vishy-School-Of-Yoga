@@ -30,7 +30,7 @@ body {
 
 /* Default brand look */
 .brand {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins';
   font-size: 1.7rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -47,7 +47,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;                             /* full pill area */
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  background: #061869;
   opacity: 0;                           /* hidden by default */
   transform: scaleX(0.4);
   transform-origin: center;
@@ -66,9 +66,15 @@ body {
 }
 
 
-.navbar {
+.home-page .navbar {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background: rgba(245, 238, 231, 0.9) !important;
+  background: #fcac66 !important;
+  backdrop-filter: blur(10px);
+}
+
+.admissions-page .navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #A9CCE3 !important;
   backdrop-filter: blur(10px);
 }
 
