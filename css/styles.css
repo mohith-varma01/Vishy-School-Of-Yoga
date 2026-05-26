@@ -126,6 +126,47 @@ body {
   text-decoration: underline;
 }
 
+.holiday-notice {
+  background: #fff3cd;
+  border: 2px solid #f4a259;
+  border-left: 6px solid #d96c33;
+  border-radius: 12px;
+  padding: 1.1rem 1.5rem;
+}
+
+.holiday-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.holiday-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2623;
+  margin-bottom: 0.2rem;
+}
+
+.holiday-sub {
+  display: block;
+  font-size: 0.95rem;
+  color: #7b6f63;
+}
+
+.testimonial-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  cursor: pointer;
+}
+
+.testimonial-link:hover .testimonial {
+  box-shadow: 0 12px 40px rgba(20, 20, 20, 0.12);
+  transform: translateY(-5px);
+  border-color: var(--accent);
+}
+
 /* Hover: rectangle appears and text turns white */
 .navbar-brand:hover .brand {
   color: #fff;
@@ -333,8 +374,9 @@ section .display-6 {
 .badge.bg-accent {
   background-color: var(--accent) !important;
   color: #2b2623;
-  padding: 6px 12px;
-  font-weight: 500;
+  padding: 9px 18px;
+  font-weight: 650;
+  font-size: 1rem;
 }
 
 /* Single instructor layout */
