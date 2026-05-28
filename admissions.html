@@ -53,27 +53,33 @@
                 <div class="row g-4">
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Full Name *</label>
-                    <input type="text" class="form-control" name="name" required>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                    <div class="invalid-feedback" id="name-error"></div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Phone *</label>
-                    <input type="tel" class="form-control" name="phone" required>
+                    <input type="tel" class="form-control" name="phone" id="phone" required>
+                    <div class="invalid-feedback" id="phone-error"></div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Email *</label>
-                    <input type="email" class="form-control" name="email">
+                    <input type="email" class="form-control" name="email" id="email" required>
+                    <div class="invalid-feedback" id="email-error"></div>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-semibold">Age *</label>
-                    <input type="number" class="form-control" name="age" min="16">
+                    <input type="number" class="form-control" name="age" id="age" min="16" max="100" required>
+                    <div class="invalid-feedback" id="age-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Address *</label>
-                    <input type="text" class="form-control" name="address" required>
+                    <input type="text" class="form-control" name="address" id="address" required>
+                    <div class="invalid-feedback" id="address-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Emergency Contact *</label>
-                    <input type="text" class="form-control" name="emergency_contact" required>
+                    <input type="text" class="form-control" name="emergency_contact" id="emergency_contact" required>
+                    <div class="invalid-feedback" id="emergency-contact-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Preferred Batch *</label>
@@ -97,6 +103,7 @@
                         </label>
                       </div>
                     </div>
+                    <div class="invalid-feedback d-block" id="batch-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Mode *</label>
@@ -110,18 +117,22 @@
                         <label class="form-check-label" for="mode2">Offline</label>
                       </div>
                     </div>
+                    <div class="invalid-feedback d-block" id="mode-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Medical Notes or Health Problems (if any)</label>
-                    <textarea class="form-control" name="medical" rows="3" placeholder="Any injuries, conditions, or pregnancy?"></textarea>
+                    <textarea class="form-control" name="medical" rows="3" id="medical_notes" placeholder="Any injuries, conditions, or pregnancy?"></textarea>
+                    <div class="invalid-feedback" id="medical-notes-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Weight (Can be checked at the yoga center)</label>
-                    <input type="text" class="form-control" name="weight">
+                    <input type="text" class="form-control" id="weight" name="weight">
+                    <div class="invalid-feedback" id="weight-error"></div>
                   </div>
                   <div class="col-12">
                     <label class="form-label fw-semibold">Blood Group</label>
-                    <input type="text" class="form-control" name="blood_group">
+                    <input type="text" class="form-control" id="blood_group" name="blood_group">
+                    <div class="invalid-feedback" id="blood-group-error"></div>
                   </div>
                   
                   <!-- Submit Button -->
