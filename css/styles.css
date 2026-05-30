@@ -19,7 +19,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar brand container */
+/* ── Navbar ─────────────────────────────────────────────── */
 .navbar-brand {
   margin-left: 0;
   padding-left: 0;
@@ -28,34 +28,6 @@ body {
   align-items: center;
 }
 
-/* Show error border on invalid inputs */
-.form-control.is-invalid {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
-}
-
-/* Show error border around invalid radio groups */
-.radio-invalid {
-  border: 2px solid #dc3545;
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-/* Error message text */
-.invalid-feedback {
-  display: none;
-  color: #dc3545;
-  font-size: 0.85rem;
-  margin-top: 4px;
-}
-
-/* Show when JS adds is-invalid to the input */
-.form-control.is-invalid ~ .invalid-feedback,
-.invalid-feedback.visible {
-  display: block;
-}
-
-/* Default brand look */
 .brand {
   font-family: 'Poppins';
   font-size: 1.7rem;
@@ -69,7 +41,6 @@ body {
   transition: color 0.2s ease;
 }
 
-/* Rectangle behind text (initially invisible) */
 .brand::before {
   content: "";
   position: absolute;
@@ -82,7 +53,6 @@ body {
   z-index: -1;
 }
 
-/* Hover: rectangle appears and text turns white */
 .navbar-brand:hover .brand {
   color: #fff;
 }
@@ -475,6 +445,49 @@ footer a:hover {
   border-color: var(--accent);
   box-shadow: 0 0 0 0.2rem rgba(244, 162, 89, 0.35);
   background: #fdf7f0;
+}
+
+/* ── Admissions form — radio button accent ──────────────── */
+.dark-accent {
+  background-color: #c8551a !important;
+}
+
+#register-form .form-check-input:checked {
+  background-color: #c8551a;
+  border-color: #c8551a;
+}
+
+#register-form .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(200, 85, 26, 0.25);
+}
+
+.text-dark-accent {
+  color: #c8551a !important;
+}
+
+/* ── Admissions form — validation ───────────────────────── */
+.form-control.is-invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.form-control.is-valid {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.12);
+}
+
+.radio-invalid {
+  border: 2px solid #dc3545 !important;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.field-error {
+  display: none;
+  color: #dc3545;
+  font-size: 0.83rem;
+  margin-top: 5px;
+  font-weight: 500;
 }
 
 /* ── Smooth Scroll ──────────────────────────────────────── */

@@ -5,141 +5,212 @@ const form = document.getElementById("admissionForm");
 const scriptURL =
     "https://script.google.com/macros/s/AKfycbwJLGhtNIodXSNrtlkTxrfv7RPjYwLreFXXheVXM9AI8Be4DxITq7S1yIqfq9pjnitt/exec";
 
+/* ─────────────────────────────────────────
+   HELPERS — mark a field valid / invalid
+───────────────────────────────────────── */
+function setError(fieldId, errorId, message) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById(errorId);
+  if (field) {
+    field.classList.add("is-invalid");
+    field.classList.remove("is-valid");
+  }
+  if (error) {
+    error.textContent = message;
+    error.style.display = "block";
+  }
+}
+
+function setValid(fieldId, errorId) {
+  const field = document.getElementById(fieldId);
+  const error = document.getElementById(errorId);
+  if (field) {
+    field.classList.remove("is-invalid");
+    field.classList.add("is-valid");
+  }
+  if (error) {
+    error.textContent = "";
+    error.style.display = "none";
+  }
+}
+
+function setRadioError(groupId, errorId, message) {
+  const group = document.getElementById(groupId);
+  const error = document.getElementById(errorId);
+  if (group) group.classList.add("radio-invalid");
+  if (error) {
+    error.textContent = message;
+    error.style.display = "block";
+  }
+}
+
+function setRadioValid(groupId, errorId) {
+  const group = document.getElementById(groupId);
+  const error = document.getElementById(errorId);
+  if (group) group.classList.remove("radio-invalid");
+  if (error) {
+    error.textContent = "";
+    error.style.display = "none";
+  }
+}
+
+/* ─────────────────────────────────────────
+   VALIDATE — checks all required fields,
+   returns { valid: bool, errors: string[] }
+───────────────────────────────────────── */
 function validate() {
   let valid = true;
+  const errors = [];   // collects labels for the popup summary
 
-  // Helper — marks a field as invalid with a message
-  function setError(fieldId, errorId, message) {
-    const field = document.getElementById(fieldId);
-    const error = document.getElementById(errorId);
-    field.classList.add('is-invalid');
-    field.classList.remove('is-valid');
-    error.textContent = message;
-    error.classList.add('visible');
-    valid = false;
-  }
-
-  // Helper — marks a field as valid, clears error
-  function setValid(fieldId, errorId) {
-    const field = document.getElementById(fieldId);
-    const error = document.getElementById(errorId);
-    field.classList.remove('is-invalid');
-    field.classList.add('is-valid');
-    error.textContent = '';
-    error.classList.remove('visible');
-  }
-
-  // ── Full Name ──
-  const name = document.getElementById('name').value.trim();
+  // ── Full Name ──────────────────────────
+  const name = document.getElementById("name").value.trim();
   if (!name) {
-    setError('name', 'name-error', 'Full name is required.');
+    setError("name", "name-error", "Full name is required.");
+    errors.push("Full Name");
+    valid = false;
   } else if (name.length < 2) {
-    setError('name', 'name-error', 'Name must be at least 2 characters.');
+    setError("name", "name-error", "Name must be at least 2 characters.");
+    errors.push("Full Name");
+    valid = false;
   } else {
-    setValid('name', 'name-error');
+    setValid("name", "name-error");
   }
 
-  // ── Phone ──
-  const phone = document.getElementById('phone').value.trim();
-  const phoneRegex = /^[6-9]\d{9}$/;   // Indian mobile: starts 6-9, 10 digits
+  // ── Phone ──────────────────────────────
+  const phone = document.getElementById("phone").value.trim();
+  const phoneRegex = /^[6-9]\d{9}$/;
   if (!phone) {
-    setError('phone', 'phone-error', 'Phone number is required.');
+    setError("phone", "phone-error", "Phone number is required.");
+    errors.push("Phone");
+    valid = false;
   } else if (!phoneRegex.test(phone)) {
-    setError('phone', 'phone-error', 'Enter a valid 10-digit Indian mobile number.');
+    setError("phone", "phone-error", "Enter a valid 10-digit Indian mobile number (starts with 6–9).");
+    errors.push("Phone");
+    valid = false;
   } else {
-    setValid('phone', 'phone-error');
+    setValid("phone", "phone-error");
   }
 
-  // ── Email ──
-  const email = document.getElementById('email').value.trim();
+  // ── Email ──────────────────────────────
+  const email = document.getElementById("email").value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email) {
-    setError('email', 'email-error', 'Email address is required.');
+    setError("email", "email-error", "Email address is required.");
+    errors.push("Email");
+    valid = false;
   } else if (!emailRegex.test(email)) {
-    setError('email', 'email-error', 'Enter a valid email address (e.g. name@email.com).');
+    setError("email", "email-error", "Enter a valid email address (e.g. name@gmail.com).");
+    errors.push("Email");
+    valid = false;
   } else {
-    setValid('email', 'email-error');
+    setValid("email", "email-error");
   }
 
-  // ── Age ──
-  const age = parseInt(document.getElementById('age').value);
-  if (!age) {
-    setError('age', 'age-error', 'Age is required.');
-  } else if (age < 16) {
-    setError('age', 'age-error', 'Minimum age to join is 16 years.');
+  // ── Age ────────────────────────────────
+  const ageVal = document.getElementById("age").value.trim();
+  const age = parseInt(ageVal);
+  if (!ageVal) {
+    setError("age", "age-error", "Age is required.");
+    errors.push("Age");
+    valid = false;
+  } else if (isNaN(age) || age < 16) {
+    setError("age", "age-error", "Minimum age to join is 16 years.");
+    errors.push("Age");
+    valid = false;
   } else if (age > 100) {
-    setError('age', 'age-error', 'Please enter a valid age.');
+    setError("age", "age-error", "Please enter a valid age (16–100).");
+    errors.push("Age");
+    valid = false;
   } else {
-    setValid('age', 'age-error');
+    setValid("age", "age-error");
   }
 
-  // ── Address ──
-  const address = document.getElementById('address').value.trim();
+  // ── Address ────────────────────────────
+  const address = document.getElementById("address").value.trim();
   if (!address) {
-    setError('address', 'address-error', 'Address is required.');
+    setError("address", "address-error", "Address is required.");
+    errors.push("Address");
+    valid = false;
   } else if (address.length < 10) {
-    setError('address', 'address-error', 'Please enter your full address.');
+    setError("address", "address-error", "Please enter your full address (at least 10 characters).");
+    errors.push("Address");
+    valid = false;
   } else {
-    setValid('address', 'address-error');
+    setValid("address", "address-error");
   }
 
-  // ── Emergency Contact ──
-  const ec = document.getElementById('emergency_contact').value.trim();
+  // ── Emergency Contact ──────────────────
+  const ec = document.getElementById("emergency_contact").value.trim();
   if (!ec) {
-    setError('emergency_contact', 'ec-error', 'Emergency contact is required.');
+    setError("emergency_contact", "ec-error", "Emergency contact is required.");
+    errors.push("Emergency Contact");
+    valid = false;
   } else if (ec.length < 5) {
-    setError('emergency_contact', 'ec-error', 'Please enter a valid emergency contact.');
+    setError("emergency_contact", "ec-error", "Please enter a valid emergency contact name or number.");
+    errors.push("Emergency Contact");
+    valid = false;
   } else {
-    setValid('emergency_contact', 'ec-error');
+    setValid("emergency_contact", "ec-error");
   }
 
-  // ── Batch (radio group) ──
+  // ── Preferred Batch (radio) ────────────
   const batchSelected = document.querySelector('input[name="batch"]:checked');
-  const batchGroup = document.getElementById('batch-group');
-  const batchError = document.getElementById('batch-error');
   if (!batchSelected) {
-    batchGroup.classList.add('radio-invalid');
-    batchError.textContent = 'Please select a preferred batch.';
-    batchError.classList.add('visible');
+    setRadioError("batch-group", "batch-error", "Please select a preferred batch.");
+    errors.push("Preferred Batch");
     valid = false;
   } else {
-    batchGroup.classList.remove('radio-invalid');
-    batchError.textContent = '';
-    batchError.classList.remove('visible');
+    setRadioValid("batch-group", "batch-error");
   }
 
-  // ── Mode (radio group) ──
+  // ── Mode (radio) ───────────────────────
   const modeSelected = document.querySelector('input[name="mode"]:checked');
-  const modeGroup = document.getElementById('mode-group');
-  const modeError = document.getElementById('mode-error');
   if (!modeSelected) {
-    modeGroup.classList.add('radio-invalid');
-    modeError.textContent = 'Please select a mode (Online or Offline).';
-    modeError.classList.add('visible');
+    setRadioError("mode-group", "mode-error", "Please select a mode — Online or Offline.");
+    errors.push("Mode");
     valid = false;
   } else {
-    modeGroup.classList.remove('radio-invalid');
-    modeError.textContent = '';
-    modeError.classList.remove('visible');
+    setRadioValid("mode-group", "mode-error");
   }
 
-  return valid;
-}    
+  return { valid, errors };
+}
 
+/* ─────────────────────────────────────────
+   SUBMIT HANDLER
+───────────────────────────────────────── */
 form.addEventListener("submit", async (e) => {
-
   e.preventDefault();
 
-  // Run validation — stop if anything is invalid
-  if (!validate()) {
-    // Scroll to the first error so the user sees it
-    const firstError = document.querySelector('.is-invalid, .radio-invalid');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const { valid, errors } = validate();
+
+  if (!valid) {
+    // Scroll to the first broken field
+    const firstInvalid = document.querySelector(".is-invalid, .radio-invalid");
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-    return;   // ← stops here, never reaches Firebase/Sheets
+
+    // Build the error list for the popup
+    const errorListHTML = errors
+      .map(e => `<li style="text-align:left; margin-bottom: 6px;">❌ &nbsp;${e}</li>`)
+      .join("");
+
+    // Show SweetAlert popup summarising all errors
+    Swal.fire({
+      title: "Please fix the following fields:",
+      html: `<ul style="list-style:none; padding:0; margin-top:8px;">${errorListHTML}</ul>`,
+      icon: "warning",
+      confirmButtonText: "OK, let me fix it",
+      confirmButtonColor: "#f4a259",
+      background: "#fff",
+      color: "#2b2623",
+    });
+
+    return;
   }
 
+  // ── All valid — proceed with submission ──
   const firebaseData = {
     createdAt: new Date(),
     name: form.name.value,
@@ -155,27 +226,21 @@ form.addEventListener("submit", async (e) => {
     blood_group: form.blood_group.value
   };
 
-  // ✅ Show loading alert immediately on submit
   Swal.fire({
     title: "Submitting...",
     text: "Please wait while we process your admission form.",
     icon: "info",
-    allowOutsideClick: false,       // ✅ Prevent user from dismissing it
-    allowEscapeKey: false,          // ✅ Prevent closing with Escape
-    showConfirmButton: false,       // ✅ No button, just a spinner feel
-    didOpen: () => {
-      Swal.showLoading();           // ✅ Shows the spinning loader
-    }
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    showConfirmButton: false,
+    didOpen: () => { Swal.showLoading(); }
   });
 
   try {
-
     await fetch(scriptURL, {
       method: "POST",
       mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         sheet: "Admissions",
         name: form.name.value,
@@ -192,15 +257,11 @@ form.addEventListener("submit", async (e) => {
       })
     });
 
-    await addDoc(
-      collection(db, "admissions"),
-      firebaseData
-    );
+    await addDoc(collection(db, "admissions"), firebaseData);
 
-    // ✅ Replaces the loading alert automatically
     Swal.fire({
       title: "Success!",
-      text: "Form submitted successfully!",
+      text: "Your registration has been submitted successfully!",
       icon: "success",
       confirmButtonColor: "#f4a259",
       background: "#fff",
@@ -209,14 +270,14 @@ form.addEventListener("submit", async (e) => {
 
     form.reset();
 
+    // Clear all green valid borders after reset
+    document.querySelectorAll(".is-valid").forEach(el => el.classList.remove("is-valid"));
+
   } catch (error) {
-
     console.error("Error submitting form:", error);
-
-    // ✅ Replaces the loading alert automatically
     Swal.fire({
       title: "Error!",
-      text: "Something went wrong.",
+      text: "Something went wrong. Please try again.",
       icon: "error",
       confirmButtonText: "OK",
       confirmButtonColor: "#f4a259",
@@ -224,37 +285,40 @@ form.addEventListener("submit", async (e) => {
       color: "#333"
     });
   }
-})
+});
 
-// Clear error on each field as user starts typing/changing
-['name', 'phone', 'email', 'age', 'address', 'emergency_contact'].forEach(fieldId => {
+/* ─────────────────────────────────────────
+   LIVE CLEARING — remove error as user
+   starts fixing each field
+───────────────────────────────────────── */
+const textFields = [
+  { fieldId: "name",              errorId: "name-error" },
+  { fieldId: "phone",             errorId: "phone-error" },
+  { fieldId: "email",             errorId: "email-error" },
+  { fieldId: "age",               errorId: "age-error" },
+  { fieldId: "address",           errorId: "address-error" },
+  { fieldId: "emergency_contact", errorId: "ec-error" },
+];
+
+textFields.forEach(({ fieldId, errorId }) => {
   const field = document.getElementById(fieldId);
   if (field) {
-    field.addEventListener('input', () => {
-      field.classList.remove('is-invalid', 'is-valid');
-      const error = document.getElementById(fieldId + '-error')
-                 || document.getElementById('ec-error');  // emergency_contact special case
-      if (error) {
-        error.textContent = '';
-        error.classList.remove('visible');
-      }
+    field.addEventListener("input", () => {
+      field.classList.remove("is-invalid", "is-valid");
+      const error = document.getElementById(errorId);
+      if (error) { error.textContent = ""; error.style.display = "none"; }
     });
   }
 });
 
-// Clear radio errors on selection
 document.querySelectorAll('input[name="batch"]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    document.getElementById('batch-group').classList.remove('radio-invalid');
-    document.getElementById('batch-error').textContent = '';
-    document.getElementById('batch-error').classList.remove('visible');
+  radio.addEventListener("change", () => {
+    setRadioValid("batch-group", "batch-error");
   });
 });
 
 document.querySelectorAll('input[name="mode"]').forEach(radio => {
-  radio.addEventListener('change', () => {
-    document.getElementById('mode-group').classList.remove('radio-invalid');
-    document.getElementById('mode-error').textContent = '';
-    document.getElementById('mode-error').classList.remove('visible');
+  radio.addEventListener("change", () => {
+    setRadioValid("mode-group", "mode-error");
   });
 });
