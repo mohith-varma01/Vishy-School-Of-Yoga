@@ -490,6 +490,11 @@ footer a:hover {
   font-weight: 500;
 }
 
+/* intl-tel-input width fix */
+.iti {
+  width: 100%;
+}
+
 /* ── Smooth Scroll ──────────────────────────────────────── */
 html {
   scroll-behavior: smooth;

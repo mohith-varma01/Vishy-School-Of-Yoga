@@ -1,5 +1,15 @@
 import { db, collection, addDoc } from "./firebase-config.js";
 
+// Initialize intl-tel-input
+const phoneInput = document.getElementById("phone");
+const iti = window.intlTelInput(phoneInput, {
+  initialCountry: "in",           // India selected by default
+  separateDialCode: true,         // shows dial code separately next to flag
+  loadUtils: () => import(
+    "https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/utils.js"
+  ),
+});
+
 const form = document.getElementById("admissionForm");
 
 const scriptURL =
@@ -76,15 +86,29 @@ function validate() {
     setValid("name", "name-error");
   }
 
-  // ── Phone ──────────────────────────────
-  const phone = document.getElementById("phone").value.trim();
-  const phoneRegex = /^[6-9]\d{9}$/;
+// ── Phone ──────────────────────────────
+  const phone = phoneInput.value.trim();
+  const countryData = iti.getSelectedCountryData();
+  const cleanPhone = phone.replace(/[\s\-()]/g, ""); 
+
+  // 1. Check validity FIRST before throwing any errors
+  let isPhoneValid = false;
+  
+  if (countryData.iso2 === "in") {
+    // Bypass the plugin for India and use strict regex
+    isPhoneValid = /^[6-9]\d{9}$/.test(cleanPhone);
+  } else {
+    // Rely on the plugin for international numbers
+    isPhoneValid = iti.isValidNumber();
+  }
+
+  // 2. Set errors based on our boolean flag
   if (!phone) {
     setError("phone", "phone-error", "Phone number is required.");
     errors.push("Phone");
     valid = false;
-  } else if (!phoneRegex.test(phone)) {
-    setError("phone", "phone-error", "Enter a valid 10-digit Indian mobile number (starts with 6–9).");
+  } else if (!isPhoneValid) {
+    setError("phone", "phone-error", `Enter a valid phone number for ${countryData.name}.`);
     errors.push("Phone");
     valid = false;
   } else {
@@ -214,7 +238,7 @@ form.addEventListener("submit", async (e) => {
   const firebaseData = {
     createdAt: new Date(),
     name: form.name.value,
-    phone: form.phone.value,
+    phone: iti.getNumber(),
     email: form.email.value,
     age: form.age.value,
     address: form.address.value,
@@ -244,7 +268,7 @@ form.addEventListener("submit", async (e) => {
       body: new URLSearchParams({
         sheet: "Admissions",
         name: form.name.value,
-        phone: form.phone.value,
+        phone: iti.getNumber(),
         email: form.email.value,
         age: form.age.value,
         address: form.address.value,
