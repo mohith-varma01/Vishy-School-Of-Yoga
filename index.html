@@ -25,6 +25,13 @@
 <script src="/_vercel/insights/script.js" defer></script>
 
 <body class="home-page">
+
+  <!-- Page Loader -->
+  <div id="page-loader" role="status" aria-label="Loading page">
+    <div class="loader-spinner"></div>
+    <span class="loader-text">Loading…</span>
+  </div>
+
   <!-- Navbar -->
   <div data-include="partials/navbar.html"></div>
 
@@ -201,14 +208,22 @@
 
   <!-- Include loader + AOS + Year script -->
   <script>
-  // Load all partials
+  // ── Page Loader ───────────────────────────────────────────────
+  const loader = document.getElementById('page-loader');
+
+  function hideLoader() {
+    loader.classList.add('loader-hidden');
+  }
+
+  // ── Load all HTML partials ────────────────────────────────────
   Promise.all(
-  Array.from(document.querySelectorAll('[data-include]')).map(el => 
-    fetch(el.getAttribute('data-include'))
-      .then(res => res.text())
-      .then(html => { el.innerHTML = html; return el; })
+    Array.from(document.querySelectorAll('[data-include]')).map(el =>
+      fetch(el.getAttribute('data-include'))
+        .then(res => res.text())
+        .then(html => { el.innerHTML = html; return el; })
     )
   ).then(() => {
+    // Init AOS animations
     AOS.init({
       duration: 800,
       easing: 'ease-in-out',
@@ -216,10 +231,51 @@
       offset: 100
     });
 
+    // Update footer year
     const yearEl = document.getElementById('year');
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // ── Smooth testimonial expand / collapse ───────────────────
+    // Native <details> can't animate the closing transition with CSS alone.
+    // We intercept clicks: prevent the default toggle, manage open ourselves,
+    // and add/remove the .is-open class so the CSS grid transition fires
+    // in both directions.
+    document.querySelectorAll('.testimonial-full').forEach(details => {
+      const summary = details.querySelector('summary');
+
+      summary.addEventListener('click', e => {
+        e.preventDefault(); // stop the browser from instantly toggling
+
+        if (details.open) {
+          // ── Closing ─────────────────────────────────────────
+          details.classList.remove('is-open');
+
+          // Wait for the CSS transition to finish (400ms matches transition duration),
+          // then remove the [open] attribute so the element truly collapses.
+          const transitionDuration = 420;
+          setTimeout(() => {
+            details.removeAttribute('open');
+          }, transitionDuration);
+
+        } else {
+          // ── Opening ─────────────────────────────────────────
+          // Set [open] first (browser needs it to render children),
+          // then on the next paint add .is-open to start the CSS transition.
+          details.setAttribute('open', '');
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              details.classList.add('is-open');
+            });
+          });
+        }
+      });
+    });
+
+    // Hide the loader once everything is ready
+    hideLoader();
+  }).catch(() => {
+    // If anything fails, still hide the loader so the page isn't stuck
+    hideLoader();
   });
   </script>
 

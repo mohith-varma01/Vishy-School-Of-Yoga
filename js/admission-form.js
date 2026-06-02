@@ -2,12 +2,10 @@ import { db, collection, addDoc } from "./firebase-config.js";
 
 // Initialize intl-tel-input
 const phoneInput = document.getElementById("phone");
+
 const iti = window.intlTelInput(phoneInput, {
-  initialCountry: "in",           // India selected by default
-  separateDialCode: true,         // shows dial code separately next to flag
-  loadUtils: () => import(
-    "https://cdn.jsdelivr.net/npm/intl-tel-input@23/build/js/utils.js"
-  ),
+  initialCountry: "in",
+  separateDialCode: true,
 });
 
 const form = document.getElementById("admissionForm");
@@ -19,8 +17,14 @@ const scriptURL =
    HELPERS — mark a field valid / invalid
 ───────────────────────────────────────── */
 function setError(fieldId, errorId, message) {
-  const field = document.getElementById(fieldId);
+  let field = document.getElementById(fieldId);
   const error = document.getElementById(errorId);
+
+  // intl-tel-input wraps the input — apply border to the wrapper instead
+  if (fieldId === "phone" && field?.closest(".iti")) {
+    field = field.closest(".iti");
+  }
+
   if (field) {
     field.classList.add("is-invalid");
     field.classList.remove("is-valid");
@@ -32,8 +36,13 @@ function setError(fieldId, errorId, message) {
 }
 
 function setValid(fieldId, errorId) {
-  const field = document.getElementById(fieldId);
+  let field = document.getElementById(fieldId);
   const error = document.getElementById(errorId);
+
+  if (fieldId === "phone" && field?.closest(".iti")) {
+    field = field.closest(".iti");
+  }
+
   if (field) {
     field.classList.remove("is-invalid");
     field.classList.add("is-valid");
@@ -88,27 +97,14 @@ function validate() {
 
 // ── Phone ──────────────────────────────
   const phone = phoneInput.value.trim();
-  const countryData = iti.getSelectedCountryData();
-  const cleanPhone = phone.replace(/[\s\-()]/g, ""); 
-
-  // 1. Check validity FIRST before throwing any errors
-  let isPhoneValid = false;
   
-  if (countryData.iso2 === "in") {
-    // Bypass the plugin for India and use strict regex
-    isPhoneValid = /^[6-9]\d{9}$/.test(cleanPhone);
-  } else {
-    // Rely on the plugin for international numbers
-    isPhoneValid = iti.isValidNumber();
-  }
-
-  // 2. Set errors based on our boolean flag
   if (!phone) {
     setError("phone", "phone-error", "Phone number is required.");
     errors.push("Phone");
     valid = false;
-  } else if (!isPhoneValid) {
-    setError("phone", "phone-error", `Enter a valid phone number for ${countryData.name}.`);
+  } else if (!iti.isValidNumber()) {
+    // The plugin now safely handles the validation for ANY selected country
+    setError("phone", "phone-error", `Enter a valid phone number for ${iti.getSelectedCountryData().name}.`);
     errors.push("Phone");
     valid = false;
   } else {
@@ -209,11 +205,7 @@ form.addEventListener("submit", async (e) => {
   const { valid, errors } = validate();
 
   if (!valid) {
-    // Scroll to the first broken field
-    const firstInvalid = document.querySelector(".is-invalid, .radio-invalid");
-    if (firstInvalid) {
-      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    
 
     // Build the error list for the popup
     const errorListHTML = errors
@@ -229,7 +221,15 @@ form.addEventListener("submit", async (e) => {
       confirmButtonColor: "#f4a259",
       background: "#fff",
       color: "#2b2623",
-    });
+    }).then(() => {
+    // Scroll AFTER the user dismisses the popup
+    const firstInvalid = document.querySelector(".is-invalid, .radio-invalid");
+    if (firstInvalid) {
+    firstInvalid.scrollIntoView({ behavior: "smooth", block: "start" });
+    // offset for fixed navbar so the field isn't hidden behind it
+    setTimeout(() => window.scrollBy({ top: -80, behavior: "smooth" }), 300);
+  }
+  });
 
     return;
   }
@@ -317,12 +317,23 @@ form.addEventListener("submit", async (e) => {
 ───────────────────────────────────────── */
 const textFields = [
   { fieldId: "name",              errorId: "name-error" },
-  { fieldId: "phone",             errorId: "phone-error" },
   { fieldId: "email",             errorId: "email-error" },
   { fieldId: "age",               errorId: "age-error" },
   { fieldId: "address",           errorId: "address-error" },
   { fieldId: "emergency_contact", errorId: "ec-error" },
 ];
+
+const phoneField = document.getElementById("phone");
+if (phoneField) {
+  phoneField.addEventListener("input", () => {
+    const wrapper = phoneField.closest(".iti");  // ← climb up to the wrapper
+    if (wrapper) {
+      wrapper.classList.remove("is-invalid", "is-valid");  // ← remove from wrapper
+    }
+    const error = document.getElementById("phone-error");
+    if (error) { error.textContent = ""; error.style.display = "none"; }
+  });
+}
 
 textFields.forEach(({ fieldId, errorId }) => {
   const field = document.getElementById(fieldId);
