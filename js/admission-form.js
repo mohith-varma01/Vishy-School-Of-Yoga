@@ -11,7 +11,7 @@ const iti = window.intlTelInput(phoneInput, {
 const form = document.getElementById("admissionForm");
 
 const scriptURL =
-    "https://script.google.com/macros/s/AKfycbwJLGhtNIodXSNrtlkTxrfv7RPjYwLreFXXheVXM9AI8Be4DxITq7S1yIqfq9pjnitt/exec";
+    "https://script.google.com/macros/s/AKfycbx98FTZfJOTqFqXJA0wbyFCKFKWbA-3Uy61FNmnE8WH0A8TVuSK8ASiT4E426IQtZ7S/exec";
 
 /* ─────────────────────────────────────────
    HELPERS — mark a field valid / invalid
