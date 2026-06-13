@@ -39,13 +39,16 @@
   <!-- Hero Carousel -->
   <div data-include="partials/carousel.html"></div>
 
+  <!-- Benefits of Yoga Carousel -->
+  <div data-include="partials/yoga-benefits.html"></div>
+
   <!-- Classes Section -->
   <!-- <div data-include="partials/classes.html"></div> -->
 
     <section id="classes" class="py-5">
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
-        <h2 class="display-6 fw-bold mb-3">What You'll Learn</h2>
+        <h2 class="display-6 fw-bold mb-3">What You'll Learn?</h2>
         <p class="text-muted lead">Comprehensive yoga training for mind and body</p>
       </div>
 
@@ -272,7 +275,89 @@
       });
     });
 
-    // Hide the loader once everything is ready
+    // ── Benefits of Yoga carousel ──────────────────────────────
+  (function () {
+    const clip    = document.querySelector('.benefits-clip');
+    const track   = document.getElementById('benefitsTrack');
+    const prevBtn = document.getElementById('benefitsPrev');
+    const nextBtn = document.getElementById('benefitsNext');
+    const dotsEl  = document.getElementById('benefitsDots');
+
+    // Guard: exits cleanly if partial is absent (e.g. on admissions.html)
+    if (!clip || !track || !prevBtn || !nextBtn || !dotsEl) return;
+
+    const VISIBLE  = window.innerWidth < 576 ? 1
+                   : window.innerWidth < 992 ? 2
+                   : 4;
+    const GAP      = 24;
+    const DURATION = 500;
+    const AUTO_MS  = 4000;
+
+    const cards  = Array.from(track.querySelectorAll('.benefit-card'));
+    const total  = cards.length;
+    const pages  = Math.ceil(total / VISIBLE);   // ceil(11/4) = 3
+
+    let current     = 0;
+    let autoTimer   = null;
+    let isAnimating = false;
+
+    // Build dot indicators
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'benefits-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Page ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    }
+
+    function getDots() { return Array.from(dotsEl.querySelectorAll('.benefits-dot')); }
+
+    function goTo(page) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      current = Math.max(0, Math.min(page, pages - 1));
+
+      const clipW = clip.getBoundingClientRect().width;
+      const cardW = (clipW - GAP * (VISIBLE - 1)) / VISIBLE;
+      const shift = current * (VISIBLE * (cardW + GAP));
+
+      track.style.transform = 'translateX(-' + shift + 'px)';
+
+      getDots().forEach((d, i) => d.classList.toggle('active', i === current));
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === pages - 1;
+
+      setTimeout(() => { isAnimating = false; }, DURATION);
+    }
+
+    function next() { goTo(current < pages - 1 ? current + 1 : 0); }
+    function prev() { goTo(current - 1); }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    prevBtn.disabled = true;
+
+    function startAuto() { autoTimer = setInterval(next, AUTO_MS); }
+    function stopAuto()  { clearInterval(autoTimer); }
+    function resetAuto() { stopAuto(); startAuto(); }
+
+    const wrapper = document.querySelector('.benefits-carousel-wrapper');
+
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
+    }, { passive: true });
+
+    wrapper.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  prev();
+      if (e.key === 'ArrowRight') next();
+    });
+  })();
+
     hideLoader();
   }).catch(() => {
     // If anything fails, still hide the loader so the page isn't stuck

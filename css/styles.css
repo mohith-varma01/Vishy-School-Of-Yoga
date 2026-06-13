@@ -283,6 +283,105 @@ section .display-6 {
   margin-bottom: 0;
 }
 
+/* ── What is Y.O.G.A? section ── */
+.yoga-meaning-section {
+  background: #fdf8f3;   /* lightest cream — distinct from the sand above */
+}
+
+.yoga-letter-card {
+  text-align: center;
+  padding: 2rem 1.25rem;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.yoga-letter-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+}
+
+.yoga-letter-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #2b2623;
+  font-size: 1.75rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.yoga-letter-word {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2b2623;
+  margin-bottom: 0.5rem;
+}
+
+.yoga-letter-desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── RD Quote section ── */
+.yoga-rd-section {
+  background: linear-gradient(135deg, #2b2623 0%, #4a3728 100%);
+  padding: 5rem 0;
+}
+
+.yoga-rd-inner {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.yoga-rd-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  /* gentle pulse to grab the eye */
+  animation: rd-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes rd-pulse {
+  0%, 100% { transform: scale(1);    opacity: 1;    }
+  50%       { transform: scale(1.12); opacity: 0.85; }
+}
+
+.yoga-rd-quote {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);  /* fluid — big on desktop, readable on mobile */
+  font-weight: 700;
+  color: #f5eee7;
+  line-height: 1.4;
+  margin: 0 0 1rem;
+  font-style: normal;
+  border: none;                              /* override browser blockquote indent */
+  padding: 0;
+}
+
+.yoga-rd-highlight {
+  color: var(--accent);                      /* amber — same as site brand */
+  display: inline-block;
+  /* underline that draws the eye */
+  text-decoration: underline;
+  text-decoration-color: rgba(244,162,89,0.4);
+  text-underline-offset: 4px;
+}
+
+.yoga-rd-sub {
+  font-size: 1.1rem;
+  color: rgba(245, 238, 231, 0.6);          /* white-ish but slightly faded for hierarchy */
+  font-style: italic;
+  margin: 0;
+}
+
 /* ── Smooth expand: the inner content wrapper ───────────────── */
 .testimonial-full .review-body {
   display: grid;
@@ -845,5 +944,255 @@ html {
 
   .instructor-photo {
     height: 240px;
+  }
+}
+/* ─────────────────────────────────────────────────────────────
+   BENEFITS OF YOGA — Smooth card-flip carousel
+   ───────────────────────────────────────────────────────────── */
+
+/* Section background — alternates from main bg */
+.benefits-section {
+  background: #f0e4d7;
+}
+
+/* ── Outer wrapper: ONLY positions the arrows, no overflow clip here ── */
+/* Arrows are absolute children of this; they must NOT be clipped.      */
+.benefits-carousel-wrapper {
+  position: relative;
+  padding: 0 56px;   /* reserves 56px on each side for arrow buttons    */
+}
+
+/* ── Clip box: the visible window that hides off-screen cards ── */
+/* Separate inner element so arrows (outside it) are never clipped.     */
+.benefits-clip {
+  overflow: hidden;
+}
+
+/* ── Scrolling track ── */
+.benefits-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* ── Individual card shell ── */
+/* 4 cards per page → 3 gaps of 24px = 72px total gap                  */
+/* Each card = (100% of .benefits-clip − 72px) ÷ 4                     */
+/* 100% resolves correctly because .benefits-clip has no padding.       */
+.benefit-card {
+  flex: 0 0 calc((100% - 72px) / 4);
+  min-width: 0;
+  perspective: 1000px;   /* 3D flip context */
+  cursor: pointer;
+}
+
+/* Two-sided flip mechanism */
+.benefit-card-inner {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;                 /* 1:1 aspect ratio square */
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefit-card:hover .benefit-card-inner,
+.benefit-card:focus-within .benefit-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & back share a common base */
+.benefit-card-front,
+.benefit-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 6px 20px rgba(15, 15, 15, 0.07);
+}
+
+/* ── Front face ── */
+.benefit-card-front {
+  background: #fdf8f3;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.benefit-card-front .benefit-icon {
+  font-size: 2.8rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.benefit-card-front h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2b2623;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Back face ── */
+.benefit-card-back {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.benefit-card-back p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* ── Accent variant (YOGA acronym card) — same width as all others ── */
+.benefit-card--wide {
+  flex: 0 0 calc((100% - 72px) / 4);
+}
+
+.benefit-card-front--accent {
+  background: linear-gradient(135deg, #fdf1e3, #fde0c0);
+  border: 2px solid var(--accent);
+}
+
+.benefit-card-back--accent {
+  background: linear-gradient(135deg, #2b2623, #4a3728);
+}
+
+.yoga-acronym {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.yoga-acronym li {
+  font-size: 0.88rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.yoga-acronym .letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  color: #2b2623;
+  font-weight: 800;
+  font-size: 1rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* ── Navigation arrows ── */
+.benefits-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--accent-dark);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 2;
+}
+
+.benefits-nav:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(244, 162, 89, 0.4);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.benefits-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.benefits-nav--prev { left: 4px; }
+.benefits-nav--next { right: 4px; }
+
+.benefits-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Dot indicators ── */
+.benefits-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.benefits-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(43, 38, 35, 0.2);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.benefits-dot.active {
+  background: var(--accent-dark);
+  transform: scale(1.3);
+}
+
+/* ── Responsive: 2 cards on tablet ── */
+@media (max-width: 991px) {
+  .benefit-card,
+  .benefit-card--wide {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+/* ── Responsive: 1 card on mobile ── */
+@media (max-width: 575px) {
+  .benefits-carousel-wrapper {
+    padding: 0 44px;
+  }
+
+  .benefit-card,
+  .benefit-card--wide {
+    flex: 0 0 100%;
+  }
+
+  .benefit-card-inner {
+    padding-bottom: 88%;   /* slightly shorter on small screens */
+  }
+
+  .benefit-card-front h3 {
+    font-size: 1rem;
+  }
+
+  .benefit-card-back p {
+    font-size: 0.85rem;
+  }
+
+  .benefits-tagline {
+    font-size: 0.9rem;
   }
 }
