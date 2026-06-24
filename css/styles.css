@@ -549,6 +549,42 @@ section .display-6 {
   }
 }
 
+/* ── Why Yoga? ───────────────────────────────────────── */
+.why-yoga-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+  border-left: 5px solid var(--accent);
+  position: relative;
+}
+
+.why-yoga-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.why-yoga-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.why-yoga-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2b2623;
+  margin: 0;
+}
+
+.why-yoga-body {
+  font-size: 0.975rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0;
+}
+
 /* ── Testimonials ───────────────────────────────────────── */
 .testimonial {
   background: #fdf8f3;
